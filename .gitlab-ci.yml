@@ -1,4 +1,4 @@
-image: node:16
+image: node:18
 
 cache:
   paths:
@@ -8,21 +8,26 @@ stages:
   - build
   - deploy
 
+# Стадия сборки
 build:
   stage: build
   script:
-    - npm install
-    - npm run build
+    - npm ci # Установка зависимостей
+    - npm run build # Сборка приложения
   artifacts:
     paths:
-      - build/
+      - build/ # Путь к папке сборки
+  only:
+    - recipes # Указываем ветку, для которой запускается сборка
 
+# Стадия деплоя
 pages:
   stage: deploy
   script:
-    - cp -r build/ public/
+    - mkdir public
+    - cp -r build/* public/ # Копируем содержимое сборки в папку public
   artifacts:
     paths:
       - public
   only:
-    - main
+    - recipes # Указываем ветку, для которой запускается деплой
