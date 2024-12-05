@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import RecipeCard from './RecipeCard';
 import { Box, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
