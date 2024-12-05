@@ -1,0 +1,33 @@
+image: node:20
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+
+# Стадия сборки
+build:
+  stage: build
+  script:
+    - npm ci --legacy-peer-deps
+    - npm run build # Сборка приложения
+  artifacts:
+    paths:
+      - build/ # Путь к папке сборки
+  only:
+    - recipes # Указываем ветку, для которой запускается сборка
+
+# Стадия деплоя
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r build/* public/ # Копируем содержимое сборки в папку public
+  artifacts:
+    paths:
+      - public
+  only:
+    - recipes # Указываем ветку, для которой запускается деплой
