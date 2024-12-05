@@ -12,7 +12,7 @@ stages:
 build:
   stage: build
   script:
-    - npm ci # Установка зависимостей
+    - npm ci --legacy-peer-deps
     - npm run build # Сборка приложения
   artifacts:
     paths:
