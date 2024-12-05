@@ -13,7 +13,6 @@ export const Approuter: React.FC = () => {
           <Route path="/recipe/:id" element={<RecipeDetail />} />
           <Route path="/favorite" element={<FavoritesPage />} />
         </Routes>
-    
     </div>
   )
 }
